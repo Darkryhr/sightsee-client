@@ -1,9 +1,9 @@
 import React from 'react';
-import PluginCarousel from 'react-multi-carousel';
+import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Card from '../Card/Card';
 
-const Carousel = ({ vacations }) => {
+const CardCarousel = ({ vacations }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -20,7 +20,7 @@ const Carousel = ({ vacations }) => {
   };
   return (
     <div className='w-full mx-auto'>
-      <PluginCarousel
+      <Carousel
         responsive={responsive}
         className='px-2 pt-10'
         infinite={true}
@@ -31,9 +31,9 @@ const Carousel = ({ vacations }) => {
         {vacations.map((vacation) => (
           <Card vacation={vacation} key={vacation.id} />
         ))}
-      </PluginCarousel>
+      </Carousel>
     </div>
   );
 };
 
-export default Carousel;
+export default CardCarousel;

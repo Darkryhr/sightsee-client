@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 
 import Footer from './navigation/Footer';
 import Navbar from './navigation/Navbar';
-import Carousel from './Carousel/Carousel';
+import CardCarousel from './Carousel/Carousel';
 import Login from './Protected/Login';
 import Register from './Protected/Register';
 import NotFoundPage from './NotFound';
@@ -77,7 +77,7 @@ const Main = () => {
           <p className='text-slate-600 text-xl pt-1'>
             Holiday destinations you can totally 100% visit for real 🤞
           </p>
-          {/* <Carousel vacations={data.data.vacations} /> */}
+          <CardCarousel vacations={data.data.vacations} />
         </div>
       ) : null}
     </main>
