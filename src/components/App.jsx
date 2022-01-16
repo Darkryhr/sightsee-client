@@ -13,6 +13,7 @@ import ProtectedRoute from './Protected/ProtectedRoute';
 import RequireAuth from './Protected/RequireAuth';
 import About from './about/About';
 import Carousel from './Carousel/Carousel';
+import Loader from './Loader/Loader';
 
 const App = () => {
   return (
@@ -79,10 +80,11 @@ const Main = () => {
           </div>
         </div>
       </div>
+
       {error ? (
         <>Oh no, there was an error</>
       ) : isLoading ? (
-        <h1>Loading...</h1>
+        <Loader />
       ) : data ? (
         <div className='bg-white h-max py-10 px-6 w-full mx-auto'>
           <h3 className='font-bold text-3xl text-slate-800'>
