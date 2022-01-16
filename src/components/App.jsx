@@ -77,7 +77,7 @@ const Main = () => {
           <p className='text-slate-600 text-xl pt-1'>
             Holiday destinations you can totally 100% visit for real 🤞
           </p>
-          <Carousel vacations={data.data.vacations} />
+          {/* <Carousel vacations={data.data.vacations} /> */}
         </div>
       ) : null}
     </main>
