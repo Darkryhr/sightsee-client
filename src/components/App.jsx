@@ -94,17 +94,11 @@ const Main = () => {
             Holiday destinations you can totally 100% visit for real 🤞
           </p>
           <div className='w-full mx-auto'>
-            <Carousel
-              responsive={responsive}
-              className='px-2 pt-10'
-              infinite={true}
-              centerMode={true}
-              itemclassName='carousel-item-padding-40px'
-              containerclassName='margin-auto'
-            >
-              {data.data.vacations.map((vacation) => (
-                <Card vacation={vacation} key={vacation.id} />
-              ))}
+            <Carousel responsive={responsive}>
+              <div>Item 1</div>
+              <div>Item 2</div>
+              <div>Item 3</div>
+              <div>Item 4</div>
             </Carousel>
           </div>
         </div>
