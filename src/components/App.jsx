@@ -3,8 +3,6 @@ import { useGetAllVacationsQuery } from '../services/vacations';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
 import { Toaster } from 'react-hot-toast';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 
 import Footer from './navigation/Footer';
 import Navbar from './navigation/Navbar';
@@ -14,7 +12,7 @@ import NotFoundPage from './NotFound';
 import ProtectedRoute from './Protected/ProtectedRoute';
 import RequireAuth from './Protected/RequireAuth';
 import About from './about/About';
-import Card from './Card/Card';
+import Carousel from './Carousel/Carousel';
 
 const App = () => {
   return (
@@ -94,12 +92,7 @@ const Main = () => {
             Holiday destinations you can totally 100% visit for real 🤞
           </p>
           <div className='w-full mx-auto'>
-            <Carousel responsive={responsive}>
-              <div>Item 1</div>
-              <div>Item 2</div>
-              <div>Item 3</div>
-              <div>Item 4</div>
-            </Carousel>
+            <Carousel vacations={data.data.vacations} />
           </div>
         </div>
       ) : null}

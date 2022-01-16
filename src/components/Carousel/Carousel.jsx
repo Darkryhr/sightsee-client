@@ -1,38 +1,27 @@
 import React from 'react';
-import Carousel from 'react-multi-carousel';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
 import Card from '../Card/Card';
 
-const CardCarousel = ({ vacations }) => {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
+const Carousel = ({ vacations }) => {
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
   };
+
   return (
     <div className='w-full mx-auto'>
-      <Carousel
-        responsive={responsive}
-        className='px-2 pt-10'
-        infinite={true}
-        centerMode={true}
-        itemclassName='carousel-item-padding-40px'
-        containerclassName='margin-auto'
-      >
+      <Slider {...settings}>
         {vacations.map((vacation) => (
           <Card vacation={vacation} key={vacation.id} />
         ))}
-      </Carousel>
+      </Slider>
     </div>
   );
 };
 
-export default CardCarousel;
+export default Carousel;
