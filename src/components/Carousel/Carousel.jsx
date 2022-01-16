@@ -20,16 +20,9 @@ const CardCarousel = ({ vacations }) => {
   };
   return (
     <div className='w-full mx-auto'>
-      <Carousel
-        responsive={responsive}
-        className='px-2 pt-10'
-        infinite={true}
-        centerMode={true}
-        itemclassName='carousel-item-padding-40px'
-        containerclassName='margin-auto'
-      >
+      <Carousel responsive={responsive}>
         {vacations.map((vacation) => (
-          <div>Vacation</div>
+          <Card vacation={vacation} key={vacation.id} />
         ))}
       </Carousel>
     </div>
