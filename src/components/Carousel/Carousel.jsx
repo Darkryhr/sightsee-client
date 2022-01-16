@@ -29,7 +29,7 @@ const CardCarousel = ({ vacations }) => {
         containerclassName='margin-auto'
       >
         {vacations.map((vacation) => (
-          <Card vacation={vacation} key={vacation.id} />
+          <div>Vacation</div>
         ))}
       </Carousel>
     </div>
