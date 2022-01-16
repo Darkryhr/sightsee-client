@@ -3,16 +3,18 @@ import { useGetAllVacationsQuery } from '../services/vacations';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
 import { Toaster } from 'react-hot-toast';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 import Footer from './navigation/Footer';
 import Navbar from './navigation/Navbar';
-import CardCarousel from './Carousel/Carousel';
 import Login from './Protected/Login';
 import Register from './Protected/Register';
 import NotFoundPage from './NotFound';
 import ProtectedRoute from './Protected/ProtectedRoute';
 import RequireAuth from './Protected/RequireAuth';
 import About from './about/About';
+import Card from './Card/Card';
 
 const App = () => {
   return (
@@ -45,6 +47,20 @@ export default App;
 
 const Main = () => {
   const { data, error, isLoading } = useGetAllVacationsQuery();
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
   return (
     <main className='container mx-auto'>
       <div className='w-full flex items-center '>
@@ -77,7 +93,20 @@ const Main = () => {
           <p className='text-slate-600 text-xl pt-1'>
             Holiday destinations you can totally 100% visit for real 🤞
           </p>
-          <CardCarousel vacations={data.data.vacations} />
+          <div className='w-full mx-auto'>
+            <Carousel
+              responsive={responsive}
+              className='px-2 pt-10'
+              infinite={true}
+              centerMode={true}
+              itemclassName='carousel-item-padding-40px'
+              containerclassName='margin-auto'
+            >
+              {data.data.vacations.map((vacation) => (
+                <Card vacation={vacation} key={vacation.id} />
+              ))}
+            </Carousel>
+          </div>
         </div>
       ) : null}
     </main>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 import Card from '../Card/Card';
 
 const CardCarousel = ({ vacations }) => {
@@ -20,7 +19,14 @@ const CardCarousel = ({ vacations }) => {
   };
   return (
     <div className='w-full mx-auto'>
-      <Carousel responsive={responsive}>
+      <Carousel
+        responsive={responsive}
+        className='px-2 pt-10'
+        infinite={true}
+        centerMode={true}
+        itemclassName='carousel-item-padding-40px'
+        containerclassName='margin-auto'
+      >
         {vacations.map((vacation) => (
           <Card vacation={vacation} key={vacation.id} />
         ))}
