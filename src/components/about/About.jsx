@@ -3,7 +3,7 @@ import React from 'react';
 const About = () => {
   return (
     <div className='w-full h-screen bg-white'>
-      <div className='max-w-2xl mx-auto py-10'>
+      <div className='max-w-2xl mx-auto py-10 sm:px-0 px-12 overflow-hidden'>
         <h3 className='text-3xl text-gray-800 font-bold leading-loose mb-2'>
           Hi there! I&apos;m Gabriel ✌️
         </h3>
@@ -26,10 +26,10 @@ const About = () => {
             out:
           </span>
         </p>
-        <div className='flex justify-center mt-10'>
+        <div className='flex flex-wrap justify-center items-center mx-auto mt-10'>
           <a
             href='https://twitter.com/GabrielAintReal'
-            className='mr-20 text-indigo-700'
+            className='mr-20 mb-8 text-indigo-700'
             target='_blank'
           >
             <svg
@@ -52,7 +52,7 @@ const About = () => {
             href='mailto:lellouchegabriel04@gmail.com
 '
             target='_blank'
-            className='mr-20 text-indigo-700'
+            className='mr-20 mb-8 text-indigo-700'
           >
             <svg
               aria-hidden='true'
@@ -72,7 +72,7 @@ const About = () => {
           </a>
           <a
             href='https://www.instagram.com/crck_dome/'
-            className='mr-20 text-indigo-700'
+            className='mr-20 mb-8 text-indigo-700'
             target='_blank'
           >
             <svg
@@ -95,7 +95,7 @@ const About = () => {
             href='https://www.linkedin.com/in/gabriellellouche
 '
             target='_blank'
-            className='mr-20 text-indigo-700'
+            className='mr-20 mb-8 text-indigo-700'
           >
             <svg
               aria-hidden='true'
@@ -116,7 +116,7 @@ const About = () => {
           <a
             href='https://github.com/Darkryhr'
             target='_blank'
-            className='text-indigo-700'
+            className='text-indigo-700 mb-8'
           >
             <svg
               aria-hidden='true'
