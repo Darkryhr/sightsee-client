@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 function RequireAuth({ children }) {
   let location = useLocation();
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector(state => state.auth);
 
-  if (!auth.user) {
+  if (false) {
     toast.error('Login to view this page');
     return <Navigate to='/login' state={{ from: location }} replace />;
   }

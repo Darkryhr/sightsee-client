@@ -19,22 +19,26 @@ const App = () => {
   return (
     <>
       <Router>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route
-            path='/browse'
-            element={
-              <RequireAuth>
-                <ProtectedRoute />
-              </RequireAuth>
-            }
-          />
-          <Route path='/about' element={<About />} />
-          <Route path='*' element={<NotFoundPage />} />
-        </Routes>
+        <div className='w-full bg-gray-50 shadow-sm'>
+          <Navbar />
+        </div>
+        <div className='container mx-auto min-h-screen'>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route
+              path='/browse'
+              element={
+                <RequireAuth>
+                  <ProtectedRoute />
+                </RequireAuth>
+              }
+            />
+            <Route path='/about' element={<About />} />
+            <Route path='*' element={<NotFoundPage />} />
+          </Routes>
+        </div>
       </Router>
       <Toaster />
       <Footer />

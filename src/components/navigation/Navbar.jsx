@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   const logout = () => {
@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className='bg-white sm:flex sm:justify-between sm:px-4 sm:py-6 container mx-auto'>
+    <header className=' sm:flex sm:justify-between sm:px-4 sm:py-6 container mx-auto'>
       <div className='flex items-center justify-between px-6 py-4 sm:p-0'>
         <div>
           <Link to='/'>
@@ -61,19 +61,19 @@ const Navbar = () => {
         }`}
       >
         <Link
-          className='block font-bold text-md hover:bg-gray-100 rounded px-2 py-1'
+          className='block font-bold text-md hover:bg-gray-200 rounded px-4 py-2'
           to='/browse'
         >
           Browse
         </Link>
         <Link
-          className='block font-bold text-md hover:bg-gray-100 rounded px-2 py-1 mt-1 sm:mt-0 sm:ml-2'
+          className='block font-bold text-md hover:bg-gray-200 rounded px-4 py-2 mt-1 sm:mt-0 sm:ml-2'
           to='/about'
         >
           About
         </Link>
 
-        <div>
+        <div className='ml-2'>
           {auth.user ? (
             <button
               type='button'
