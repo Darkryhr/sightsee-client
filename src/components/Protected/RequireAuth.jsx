@@ -5,7 +5,7 @@ function RequireAuth({ children }) {
   let location = useLocation();
   const auth = useSelector(state => state.auth);
 
-  if (false) {
+  if (!auth.user) {
     toast.error('Login to view this page');
     return <Navigate to='/login' state={{ from: location }} replace />;
   }
