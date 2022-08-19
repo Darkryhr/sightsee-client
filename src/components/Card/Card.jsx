@@ -51,9 +51,9 @@ const Card = ({ vacation, following = null }) => {
   // P%8n2Jwi
 
   return (
-    <div className='overflow-hidden relative w-72 mx-auto'>
+    <div className='overflow-hidden relative w-40 sm:w-60 lg:w-72 mx-auto mb-6'>
       <img
-        className='object-cover rounded-lg mb-3 w-full h-72'
+        className='object-cover rounded-lg mb-3 w-full h-40 sm:h-60 lg:h-72'
         src={vacation.img}
         alt={vacation.destination}
       />

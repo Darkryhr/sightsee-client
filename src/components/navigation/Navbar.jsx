@@ -10,6 +10,7 @@ import {
   MdOutlineClose,
 } from 'react-icons/md';
 import SearchBar from '../Searchbar';
+import { setSearch } from '../../redux/searchSlice';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +44,12 @@ const Navbar = () => {
     <nav className='flex justify-between max-w-screen-2xl mx-auto items-center px-5 2xl:px-0 py-3'>
       <div className='flex w-full max-w-md justify-start'>
         <Link to='/'>
-          <h1 className='font-extrabold text-2xl tracking-tight transition hover:text-indigo-600 pb-1'>
+          <h1
+            className='font-extrabold text-2xl tracking-tight transition hover:text-indigo-600 pb-1'
+            onClick={() => {
+              dispatch(setSearch(''));
+            }}
+          >
             sightsee
           </h1>
         </Link>
@@ -53,13 +59,13 @@ const Navbar = () => {
       </div>
       <div className='sm:flex items-center hidden w-full max-w-md justify-end'>
         {/* <Link
-          className='font-bold transition duration-200 hover:opacity-60 px-3'
-          to='/browse'
+          className='font-semibold text-gray-700 transition duration-200 hover:opacity-60 px-3 text-sm'
+          to='/account'
         >
-          Browse
+          Account
         </Link> */}
         <Link
-          className='font-semibold text-gray-700 transition duration-200 hover:opacity-60 px-3'
+          className='font-semibold text-gray-700 transition duration-200 hover:opacity-60 px-3 text-sm'
           to='/about'
         >
           About
@@ -125,9 +131,9 @@ export const MobileMenu = ({ auth, setIsOpen, handleClickOutside }) => {
       <Link
         className='font-bold transition duration-200 w-full text-center py-3 hover:bg-gray-200'
         onClick={() => handleClickOutside()}
-        to='/browse'
+        to='/account'
       >
-        Browse
+        Account
       </Link>
       <Link
         className='font-bold transition duration-200 w-full text-center py-3 hover:bg-gray-200'
@@ -148,7 +154,7 @@ export const MobileMenu = ({ auth, setIsOpen, handleClickOutside }) => {
         <Link to='/login'>
           <button
             type='button'
-            className='bg-indigo-600 transition text-white font-semibold py-1 px-4 rounded-full hover:bg-indigo-500 '
+            className='bg-indigo-600 transition text-white font-semibold w-full rounded-md py-3 hover:bg-indigo-500'
           >
             Login
           </button>
