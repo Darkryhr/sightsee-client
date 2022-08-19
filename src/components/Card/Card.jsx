@@ -42,7 +42,7 @@ const Card = ({ vacation, following = null }) => {
 
     toast.promise(update(id), {
       loading: 'Loading',
-      success: 'Got the data',
+      success: 'Followed!',
       error: 'Error when fetching',
     });
   };

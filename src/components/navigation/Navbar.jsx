@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearCredentials } from '../../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { MdOutlineMenuOpen, MdOutlineMenu } from 'react-icons/md';
+import {
+  MdOutlineMenuOpen,
+  MdOutlineMenu,
+  MdOutlineClose,
+} from 'react-icons/md';
 import SearchBar from '../Searchbar';
 
 const Navbar = () => {
@@ -36,7 +40,7 @@ const Navbar = () => {
   });
 
   return (
-    <header className='flex justify-between max-w-screen-2xl mx-auto items-center px-5 2xl:px-0 py-3'>
+    <nav className='flex justify-between max-w-screen-2xl mx-auto items-center px-5 2xl:px-0 py-3'>
       <div className='flex w-full max-w-md justify-start'>
         <Link to='/'>
           <h1 className='font-extrabold text-2xl tracking-tight transition hover:text-indigo-600 pb-1'>
@@ -93,7 +97,7 @@ const Navbar = () => {
       </div>
       {isOpen && (
         <div
-          className='h-[30vh] absolute top-0 right-0 z-10 w-full flex items-start justify-center sm:hidden mt-6'
+          className='absolute top-0 right-0 z-10 w-full flex items-start justify-center sm:hidden mt-6'
           ref={ref}
         >
           <MobileMenu
@@ -103,7 +107,7 @@ const Navbar = () => {
           />
         </div>
       )}
-    </header>
+    </nav>
   );
 };
 
@@ -111,15 +115,13 @@ export default Navbar;
 
 export const MobileMenu = ({ auth, setIsOpen, handleClickOutside }) => {
   return (
-    <div className='h-full p-4 bg-white w-11/12 rounded-lg border border-gray-300 flex flex-col items-center justify-center relative'>
-      <button
-        type='button'
-        className=' w-full flex justify-center transition duration-200 py-2 hover:bg-gray-200'
-        onClick={() => setIsOpen(false)}
-      >
-        <MdOutlineMenu size={26} />
-      </button>
-      <SearchBar />
+    <div className='h-full bg-white w-11/12 rounded border border-gray-300 flex flex-col items-center justify-center relative px-6 pt-11 pb-4'>
+      <div className='absolute top-3 flex justify-between w-full px-3'>
+        <SearchBar />
+        <button type='button' onClick={() => setIsOpen(false)} className='pl-2'>
+          <MdOutlineClose size={24} />
+        </button>
+      </div>
       <Link
         className='font-bold transition duration-200 w-full text-center py-3 hover:bg-gray-200'
         onClick={() => handleClickOutside()}

@@ -78,7 +78,7 @@ const Main = () => {
         <Loader />
       ) : data ? (
         <div className='container mx-auto'>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 lg:px-0 pt-6 mx-auto sm:px-4 gap-6'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 lg:px-0 pt-6 mx-auto sm:px-4 gap-6'>
             {renderBySearch()}
           </div>
         </div>

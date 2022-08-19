@@ -26,7 +26,7 @@ const SearchBar = () => {
           placeholder='Search'
           name='search'
           {...register('search')}
-          className='h-12 px-5 pr-16 text-sm focus:outline-none w-full rounded-full'
+          className='h-8 px-5 text-sm focus:outline-none w-full rounded-full'
         />
         <button
           type='submit'
