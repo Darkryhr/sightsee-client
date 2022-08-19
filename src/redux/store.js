@@ -4,7 +4,7 @@ import { emptySplitApi } from '../services/api';
 import authReducer from './authSlice';
 import vacationReducer from './vacationSlice';
 import followReducer from './followSlice';
-import searchReducer from './SearchSlice';
+import searchReducer from './searchSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import persistStore from 'redux-persist/lib/persistStore';
