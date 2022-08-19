@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { setSearch } from '../redux/SearchSlice';
+import { setSearch } from '../redux/searchSlice';
 import { useLocation } from 'react-router-dom';
 
 const SearchBar = () => {
