@@ -3,7 +3,7 @@ import React from 'react';
 const About = () => {
   return (
     <div className='w-full h-screen bg-white'>
-      <div className='max-w-2xl mx-auto py-10 sm:px-0 px-12 overflow-hidden'>
+      <div className='mx-auto py-4 px-6 overflow-hidden'>
         <h3 className='text-3xl text-gray-800 font-bold leading-loose mb-2'>
           Hi there! I&apos;m Gabriel ✌️
         </h3>

@@ -1,17 +1,18 @@
-import React from 'react';
-import logo from './sightsee-logo.svg';
-import { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCredentials } from '../../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { MdOutlineMenuOpen, MdOutlineMenu } from 'react-icons/md';
+import SearchBar from '../Searchbar';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  let ref = useRef(null);
 
   const logout = () => {
     try {
@@ -24,78 +25,133 @@ const Navbar = () => {
     }
   };
 
-  return (
-    <header className=' sm:flex sm:justify-between sm:px-4 sm:py-6 container mx-auto'>
-      <div className='flex items-center justify-between px-6 py-4 sm:p-0'>
-        <div>
-          <Link to='/'>
-            <img className='h-8' src={logo} alt='logo' />
-          </Link>
-        </div>
+  const handleClickOutside = event => {
+    if (ref.current && !ref.current.contains(event.target)) setIsOpen(false);
+  };
 
-        <div className='sm:hidden'>
-          <button
-            type='button'
-            className='block text-gray-700 hover:text-blue-700 focus:text-blue-700 focus:outline-none'
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <svg className='h-6 w-6 fill-current' viewBox='0 0 24 24'>
-              {isOpen ? (
-                <path
-                  fill-rule='evenodd'
-                  d='M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z'
-                />
-              ) : (
-                <path
-                  fillRule='evenodd'
-                  d='M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z'
-                />
-              )}
-            </svg>
-          </button>
-        </div>
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+    return () =>
+      document.removeEventListener('click', handleClickOutside, true);
+  });
+
+  return (
+    <header className='flex justify-between max-w-screen-2xl mx-auto items-center px-5 2xl:px-0 py-3'>
+      <div className='flex w-full max-w-md justify-start'>
+        <Link to='/'>
+          <h1 className='font-extrabold text-2xl tracking-tight transition hover:text-indigo-600 pb-1'>
+            sightsee
+          </h1>
+        </Link>
       </div>
-      <div
-        className={`px-2 pb-4 pt-2 sm:flex sm:p-0 sm:items-center ${
-          isOpen ? 'block' : 'hidden'
-        }`}
-      >
-        <Link
-          className='block font-bold text-md hover:bg-gray-200 rounded px-4 py-2'
+      <div className='w-full max-w-xs hidden sm:block'>
+        <SearchBar />
+      </div>
+      <div className='sm:flex items-center hidden w-full max-w-md justify-end'>
+        {/* <Link
+          className='font-bold transition duration-200 hover:opacity-60 px-3'
           to='/browse'
         >
           Browse
-        </Link>
+        </Link> */}
         <Link
-          className='block font-bold text-md hover:bg-gray-200 rounded px-4 py-2 mt-1 sm:mt-0 sm:ml-2'
+          className='font-semibold text-gray-700 transition duration-200 hover:opacity-60 px-3'
           to='/about'
         >
           About
         </Link>
-
-        <div className='ml-2'>
-          {auth.user ? (
+        {auth.user ? (
+          <button
+            type='button'
+            onClick={() => logout()}
+            className='bg-white transition text-gray-900 font-semibold py-1 pr-2 pl-3 rounded-full hover:shadow-lg ml-2 border border-gray-300'
+          >
+            <div className='flex justify-between items-center'>
+              <span className='text-sm pr-2 text-gray-500'>Logout</span>
+              <div className='bg-gray-500 w-6 h-6 rounded-3xl'></div>
+            </div>
+          </button>
+        ) : (
+          <Link to='/login'>
             <button
               type='button'
-              onClick={() => logout()}
-              className='font-bold block text-sm bg-blue-700 mb-1 text-white px-5 py-2 rounded-full hover:bg-blue-400 sm:ml-4 mt-1 transition-all'
+              className='bg-indigo-600 transition text-white font-semibold py-1.5 px-4 rounded-full hover:bg-indigo-500'
             >
-              Logout
+              Login
             </button>
-          ) : (
-            <Link to='/login'>
-              <button
-                type='button'
-                className='font-bold block text-sm bg-blue-700 mb-1 text-white px-5 py-2 rounded-full hover:bg-blue-400 sm:ml-4 mt-1 transition-all'
-              >
-                Login
-              </button>
-            </Link>
-          )}
-        </div>
+          </Link>
+        )}
       </div>
+      <div className='sm:hidden'>
+        <button
+          type='button'
+          className='block text-gray-800 hover:text-blue-700 focus:text-blue-700 focus:outline-none'
+          onClick={() => setIsOpen(true)}
+        >
+          <MdOutlineMenuOpen size={26} />
+        </button>
+      </div>
+      {isOpen && (
+        <div
+          className='h-[30vh] absolute top-0 right-0 z-10 w-full flex items-start justify-center sm:hidden mt-6'
+          ref={ref}
+        >
+          <MobileMenu
+            auth={auth}
+            setIsOpen={setIsOpen}
+            handleClickOutside={handleClickOutside}
+          />
+        </div>
+      )}
     </header>
   );
 };
 
 export default Navbar;
+
+export const MobileMenu = ({ auth, setIsOpen, handleClickOutside }) => {
+  return (
+    <div className='h-full p-4 bg-white w-11/12 rounded-lg border border-gray-300 flex flex-col items-center justify-center relative'>
+      <button
+        type='button'
+        className=' w-full flex justify-center transition duration-200 py-2 hover:bg-gray-200'
+        onClick={() => setIsOpen(false)}
+      >
+        <MdOutlineMenu size={26} />
+      </button>
+      <SearchBar />
+      <Link
+        className='font-bold transition duration-200 w-full text-center py-3 hover:bg-gray-200'
+        onClick={() => handleClickOutside()}
+        to='/browse'
+      >
+        Browse
+      </Link>
+      <Link
+        className='font-bold transition duration-200 w-full text-center py-3 hover:bg-gray-200'
+        onClick={() => handleClickOutside()}
+        to='/about'
+      >
+        About
+      </Link>
+      {auth.user ? (
+        <button
+          type='button'
+          onClick={() => logout()}
+          className='bg-indigo-600 transition text-white font-semibold w-full rounded-md py-3 hover:bg-indigo-500'
+        >
+          Logout
+        </button>
+      ) : (
+        <Link to='/login'>
+          <button
+            type='button'
+            className='bg-indigo-600 transition text-white font-semibold py-1 px-4 rounded-full hover:bg-indigo-500 '
+          >
+            Login
+          </button>
+        </Link>
+      )}
+    </div>
+  );
+};

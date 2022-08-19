@@ -1,15 +1,18 @@
 import { emptySplitApi } from './api';
 
 const followsApi = emptySplitApi.injectEndpoints({
-  endpoints: (builder) => ({
-    getFollowed: builder.mutation({
+  endpoints: builder => ({
+    getFollowed: builder.query({
       query: () => '/follow',
     }),
     addTo: builder.mutation({
-      query: (id) => `/follow/${id}`,
+      query: id => ({
+        url: `/follow/${id}`,
+        method: 'POST',
+      }),
     }),
     removeFrom: builder.mutation({
-      query: (id) => ({
+      query: id => ({
         url: `/follow/${id}`,
         method: 'DELETE',
       }),
@@ -17,8 +20,5 @@ const followsApi = emptySplitApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetFollowedMutation,
-  useAddToMutation,
-  useRemoveFromMutation,
-} = followsApi;
+export const { useGetFollowedQuery, useAddToMutation, useRemoveFromMutation } =
+  followsApi;

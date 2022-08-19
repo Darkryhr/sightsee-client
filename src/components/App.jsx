@@ -1,9 +1,7 @@
 import React from 'react';
 import { useGetAllVacationsQuery } from '../services/vacations';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { BiSearch } from 'react-icons/bi';
 import { Toaster } from 'react-hot-toast';
-
 import Footer from './navigation/Footer';
 import Navbar from './navigation/Navbar';
 import Login from './Protected/Login';
@@ -12,17 +10,19 @@ import NotFoundPage from './NotFound';
 import ProtectedRoute from './Protected/ProtectedRoute';
 import RequireAuth from './Protected/RequireAuth';
 import About from './about/About';
-import Carousel from './Carousel/Carousel';
 import Loader from './Loader/Loader';
+import Card from './Card/Card';
+import { useSelector } from 'react-redux';
+import { useGetFollowedQuery } from '../services/follow';
 
 const App = () => {
   return (
     <>
       <Router>
-        <div className='w-full bg-gray-50 shadow-sm'>
+        <div className='w-full'>
           <Navbar />
         </div>
-        <div className='container mx-auto min-h-screen'>
+        <div className='mx-auto min-h-screen max-w-screen-2xl pt-1 pb-20'>
           <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/login' element={<Login />} />
@@ -50,55 +50,36 @@ export default App;
 
 const Main = () => {
   const { data, error, isLoading } = useGetAllVacationsQuery();
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-  return (
-    <main className='container mx-auto'>
-      <div className='w-full flex items-center '>
-        <div className='md:px-10 md:py-10 p-8 relative'>
-          <img
-            src='https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-            alt='hiking'
-            className='shadow-lg rounded-3xl w-full'
-          />
-          <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center'>
-            <h1 className='text-xl font-bold tracking-tight pt-10 pb-4 px-6 text-white sm:text-4xl text-center'>
-              Welcome to your next destination
-            </h1>
-            <button className='bg-white rounded-full text-indigo-500 font-semibold  py-2 px-4 flex items-center shadow-md hover:scale-105 transition-all w-36 justify-center'>
-              <BiSearch className='mr-2' />
-              Find More
-            </button>
-          </div>
-        </div>
-      </div>
+  const follow = useGetFollowedQuery();
+  const search = useSelector(state => state.search);
 
+  if (follow.isLoading) return null;
+
+  const vacationMap = () =>
+    data.data.vacations.map(vacation => (
+      <Card
+        vacation={vacation}
+        key={vacation.id}
+        following={follow?.data?.data?.followed?.includes(vacation.id)}
+      />
+    ));
+
+  const renderBySearch = () => {
+    return vacationMap().filter(vacation => {
+      if (vacation.props.vacation.destination.includes(search)) return vacation;
+    });
+  };
+
+  return (
+    <main>
       {error ? (
         <>Oh no, there was an error</>
       ) : isLoading ? (
         <Loader />
       ) : data ? (
-        <div className='bg-white h-max py-10 px-6 w-full mx-auto'>
-          <h3 className='font-bold text-3xl text-slate-800'>
-            Check out our experiences
-          </h3>
-          <p className='text-slate-600 text-xl pt-1'>
-            Holiday destinations you can totally 100% visit for real 🤞
-          </p>
-          <div className='w-full mx-auto'>
-            <Carousel vacations={data.data.vacations} />
+        <div className='container mx-auto'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 lg:px-0 pt-6 mx-auto sm:px-4 gap-6'>
+            {renderBySearch()}
           </div>
         </div>
       ) : null}
