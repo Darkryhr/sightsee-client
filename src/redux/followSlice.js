@@ -11,11 +11,15 @@ const slice = createSlice({
       return [...state, payload];
     },
     removeFollow: (state, { payload }) => {
-      return [...state.filter((id) => id !== payload)];
+      return [...state.filter(id => id !== payload)];
+    },
+    clearFollows: () => {
+      return [];
     },
   },
 });
 
 export default slice.reducer;
 
-export const { setFollows, addFollow, removeFollow } = slice.actions;
+export const { setFollows, addFollow, removeFollow, clearFollows } =
+  slice.actions;

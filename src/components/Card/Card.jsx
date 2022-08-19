@@ -72,7 +72,7 @@ const Card = ({ vacation, following = null }) => {
           <AiFillHeart
             size={24}
             className={`${
-              isFollow
+              isFollow && auth.user
                 ? 'fill-red-700'
                 : 'fill-gray-700 stroke-red-700 opacity-50'
             }

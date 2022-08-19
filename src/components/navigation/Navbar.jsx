@@ -22,6 +22,7 @@ const Navbar = () => {
   const logout = () => {
     try {
       dispatch(clearCredentials());
+      dispatch(clearCredentials());
       toast('Goodbye 👋');
       navigate('/');
     } catch (error) {
@@ -110,6 +111,7 @@ const Navbar = () => {
             auth={auth}
             setIsOpen={setIsOpen}
             handleClickOutside={handleClickOutside}
+            logout={logout}
           />
         </div>
       )}
@@ -119,7 +121,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-export const MobileMenu = ({ auth, setIsOpen, handleClickOutside }) => {
+export const MobileMenu = ({ auth, setIsOpen, handleClickOutside, logout }) => {
   return (
     <div className='h-full bg-white w-11/12 rounded border border-gray-300 flex flex-col items-center justify-center relative px-6 pt-11 pb-4'>
       <div className='absolute top-3 flex justify-between w-full px-3'>
@@ -151,7 +153,11 @@ export const MobileMenu = ({ auth, setIsOpen, handleClickOutside }) => {
           Logout
         </button>
       ) : (
-        <Link to='/login'>
+        <Link
+          to='/login'
+          className='w-full'
+          onClick={() => handleClickOutside()}
+        >
           <button
             type='button'
             className='bg-indigo-600 transition text-white font-semibold w-full rounded-md py-3 hover:bg-indigo-500'
